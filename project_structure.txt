@@ -1,0 +1,91 @@
+# Project Structure Fixes
+
+## Directory Structure Issues
+Your project structure has a few issues that need to be fixed:
+
+1. The folder `wwroot` is misspelled - it should be `wwwroot`
+2. View files need to be organized according to MVC conventions
+
+## Correct Directory Structure
+
+```
+.
+├── appsettings.Development.json
+├── appsettings.json
+├── Controllers
+│   ├── AccountController.cs
+│   └── HomeController.cs
+├── fbauth.csproj
+├── Program.cs
+├── Properties
+│   └── launchSettings.json
+├── README.md
+├── setup.sh
+├── Views
+│   ├── Home
+│   │   ├── Index.cshtml
+│   │   └── Profile.cshtml
+│   ├── Shared
+│   │   ├── _Layout.cshtml
+│   │   └── Error.cshtml
+│   ├── _ViewImports.cshtml
+│   └── _ViewStart.cshtml
+└── wwwroot
+    ├── css
+    │   └── site.css
+    └── js
+        └── site.js
+```
+
+## Steps to Fix
+
+1. Rename the `wwroot` directory to `wwwroot`:
+   ```bash
+   mv wwroot wwwroot
+   ```
+
+2. Create the proper folder structure for views:
+   ```bash
+   mkdir -p Views/Home
+   mkdir -p Views/Shared
+   ```
+
+3. Move the view files to the correct locations:
+   ```bash
+   mv Index.cshtml Views/Home/
+   mv Profile.cshtml Views/Home/
+   mv _Layout.cshtml Views/Shared/
+   ```
+
+4. Create the missing files:
+   ```bash
+   touch Views/_ViewImports.cshtml
+   touch Views/_ViewStart.cshtml
+   touch Views/Shared/Error.cshtml
+   mkdir -p wwwroot/css
+   mkdir -p wwwroot/js
+   touch wwwroot/css/site.css
+   touch wwwroot/js/site.js
+   ```
+
+5. Copy the provided code into each file.
+
+## Port Configuration
+
+Ensure your launchSettings.json has the correct ports matching those in your Facebook Developer Console:
+
+```json
+{
+  "profiles": {
+    "Development": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7067;http://localhost:5210",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
+```
